@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.yn_1.novello_app.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_profileView"
+            app:destination="@id/profileView" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsView"
+            app:destination="@id/settingsView" />
+    </fragment>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.yn_1.novello_app.library.LibraryFragment"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_readingFragment"
+            app:destination="@id/readingFragment" >
+            <argument
+                android:name="readingLink"
+                android:defaultValue="null" />
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+            <argument
+                android:name="bookTitle"
+                android:defaultValue="null" />
+        </action>
+        <action
+            android:id="@+id/action_libraryFragment_to_bookFragment"
+            app:destination="@id/bookFragment" >
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
+        <action
+            android:id="@+id/action_libraryFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" >
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/readingFragment"
+        android:name="com.yn_1.novello_app.reading.ReadingFragment"
+        android:label="fragment_reading"
+        tools:layout="@layout/fragment_reading" >
+        <argument
+            android:name="readingLink"
+            app:argType="string" />
+        <argument
+            android:name="bookID"
+            app:argType="integer"
+            android:id="@+id/action_libraryFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
+        <argument
+            android:name="bookTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.yn_1.novello_app.book.BookFragment"
+        android:label="fragment_book"
+        tools:layout="@layout/fragment_book" >
+        <argument
+            android:name="bookID"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartView"
+        android:name="com.yn_1.novello_app.cart.CartView"
+        android:label="CartView" >
+        <action
+            android:id="@+id/action_cartView_to_purchaseFragment"
+            app:destination="@id/purchaseFragment" >
+            <argument
+                android:name="userID"
+                android:defaultValue="-1" />
+        </action>
+        <action
+            android:id="@+id/action_cartView_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.yn_1.novello_app.cart.PurchaseFragment"
+        android:label="PurchaseFragment" >
+        <argument
+            android:name="userID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_purchaseFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="cartPrices"
+            app:argType="float[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="cartIDs"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/discoverView"
+        android:name="com.yn_1.novello_app.discovery.DiscoveryView"
+        android:label="fragment_discovery_view"
+        tools:layout="@layout/fragment_discovery_view" >
+        <action
+            android:id="@+id/action_discoverView_to_bookFragment"
+            app:destination="@id/bookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.yn_1.novello_app.review.ReviewFragment"
+        android:label="fragment_review"
+        tools:layout="@layout/fragment_review" >
+        <action
+            android:id="@+id/action_reviewFragment_to_bookFragment"
+            app:destination="@id/bookFragment" >
+            <argument
+                android:name="bookID"
+                android:defaultValue="-1" />
+        </action>
+        <argument
+            android:name="bookID"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.yn_1.novello_app.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_createChatFragment"
+            app:destination="@id/createChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.yn_1.novello_app.message.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" >
+        <argument
+            android:name="currentUser"
+            app:argType="com.yn_1.novello_app.account.User" />
+        <argument
+            android:name="currentChat"
+            app:argType="com.yn_1.novello_app.chat.Chat" />
+    </fragment>
+    <fragment
+        android:id="@+id/createChatFragment"
+        android:name="com.yn_1.novello_app.create_chat.CreateChatFragment"
+        android:label="fragment_friend_list"
+        tools:layout="@layout/fragment_friend_list" >
+        <argument
+            android:name="currentUser"
+            app:argType="com.yn_1.novello_app.account.AdultUser" />
+        <action
+            android:id="@+id/action_createChatFragment_to_chatFragment2"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileView"
+        android:name="com.yn_1.novello_app.account.ProfileView"
+        android:label="fragment_profile_view"
+        tools:layout="@layout/fragment_profile_view" >
+        <argument
+            android:name="userID"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_profileView_to_friendsView"
+            app:destination="@id/friendsView" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsView"
+        android:name="com.yn_1.novello_app.account.FriendsView"
+        android:label="FriendsView"
+        tools:layout="@layout/fragment_friends_view">
+        <argument
+            android:name="friendsArray"
+            android:defaultValue="@null"
+            app:argType="string[]"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsView"
+        android:name="com.yn_1.novello_app.account.SettingsView"
+        android:label="fragment_settings_view"
+        tools:layout="@layout/fragment_settings_view" />
+</navigation>
