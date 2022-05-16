@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>BackendCode</name>
-    <url>http://coms-309-013.class.las.iastate.edu:8080/</url>
+    <url>https://novello-app.herokuapp.com:8080/</url>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
