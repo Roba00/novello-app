@@ -25,7 +25,12 @@ public class FriendsController {
         User user;
         int i;
         int uid = 0;
-        for (i = 1; i <= UIDB.count(); i++) {
+
+        // Database counting order: 4, 14, 24, 34, 44, ...
+        int lastElement = 4 + (int)(UIDB.count() - 1) * 10;
+        if (UIDB.count() == 0) lastElement = 0;
+
+        for (i = 4; i <= lastElement; i+=10) {
             user = UIDB.findById(i).orElseThrow(RuntimeException::new);
             if (user.username.equals(jsonObject.getAsString("receiverusrname"))) {
                 uid = user.getId();
