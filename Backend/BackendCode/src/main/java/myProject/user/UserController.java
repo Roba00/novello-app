@@ -47,11 +47,15 @@ public class UserController {
 
         User user;
         JSONObject jsonReturn = new JSONObject();
-        int i;
-        for(i = 1; i<=db.count(); i++){
+
+        // Database counting order: 4, 14, 24, 34, 44, ...
+        int lastElement = 4 + (int)(db.count() - 1) * 10;
+        if (db.count() == 0) lastElement = 0;
+
+        for (int i = 4; i <= lastElement; i+=20) {
             user = db.findById(i).orElseThrow(RuntimeException::new);
-            if(user.username.equals(json.getAsString("username"))){
-                if(user.password.equals(json.getAsString("password"))){
+            if (user.username.equals(json.getAsString("username"))) {
+                if (user.password.equals(json.getAsString("password"))) {
                     jsonReturn.put("userId",i);
                     return jsonReturn;
                 }
